@@ -187,17 +187,7 @@ public class Movie {
     // toString() для тестового вывода актеров
     @Override
     public String toString() {
-        return "Movie{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", genre='" + genre + '\'' +
-                ", country='" + country + '\'' +
-                ", year=" + year +
-                ", director='" + director + '\'' +
-                ", duration='" + duration + '\'' +
-                ", description='" + description + '\'' +
-                ", rating=" + rating +
-                '}';
+        return " " + title + " (" + year + ")";
     }
 
     // для сравнения и поиска объектов в списке
@@ -206,14 +196,11 @@ public class Movie {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Movie movie = (Movie) o;
-        return id == movie.id && year == movie.year && Double.compare(movie.rating, rating)
-                == 0 && Objects.equals(title, movie.title) && Objects.equals(genre, movie.genre)
-                && Objects.equals(country, movie.country) && Objects.equals(director, movie.director)
-                && Objects.equals(duration, movie.duration) && Objects.equals(description, movie.description);
+        return id == movie.id && Objects.equals(title, movie.title);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, genre, country, year, director, duration, description, rating);
+        return Objects.hash(id, title);
     }
 }

@@ -18,12 +18,12 @@
 <p th:text="${'Актеры: ' + movie.getActors()}">VALUE</p>
 
 <br/>
-
-<a th:href="@{/admin/{id}/edit(id=${movie.getId()})}">Редактировать</a>
-
+<form th:method="GET" th:action="@{/admin/{id}/edit(id=${movie.getId()})}">
+    <input type="submit" value="Редактировать данные фильма"/>
+</form>
 <br/>
 <form th:method="DELETE" th:action="@{/admin/{id}(id=${movie.getId()})}">
-    <input type="submit" value="Удалить"/>
+    <input type="submit" value="Удалить фильм"/>
 </form>
 
 

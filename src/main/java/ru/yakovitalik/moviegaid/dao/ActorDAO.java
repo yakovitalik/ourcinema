@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import ru.yakovitalik.moviegaid.models.Actor;
-import ru.yakovitalik.moviegaid.models.Movie;
 
 import java.util.List;
 
+// класс для операций с базой данных для актеров
 @Component
 public class ActorDAO {
 
@@ -20,34 +20,33 @@ public class ActorDAO {
         this.sessionFactory = sessionFactory;
     }
 
+
+    // выгрузить список всех актеров их базы данных
     @Transactional(readOnly = true)
-    public List<Actor> allactors() {
+    public List<Actor> index() {
         Session session = sessionFactory.getCurrentSession();
 
-        return session.createQuery("select p from Actor p", Actor.class)
+        return session.createQuery("select a from Actor a", Actor.class)
                 .getResultList();
     }
 
+    // выгрузить конкретного актера из базы данных
     @Transactional(readOnly = true)
-    public List<Actor> showall(int movieId) {
+    public Actor show(int id) {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("select p from Actor p", Actor.class)
-                .getResultList();
+        Actor actor = session.get(Actor.class, id);
+        String movies = actor.getMovies().toString();
+        return actor;
     }
 
-    public List<Actor> show(int movieId) {
-        Session session = sessionFactory.getCurrentSession();
-        Movie movie = session.get(Movie.class, movieId);
-        List<Actor> actors = movie.getActors();
-        return actors;
-    }
-
+    // сохранить актера в базе данных
     @Transactional
     public void save(Actor actor) {
         Session session = sessionFactory.getCurrentSession();
         session.save(actor);
     }
 
+    // обновить данные актера в базе данных
     @Transactional
     public void update(int id, Actor updatedActor) {
         Session session = sessionFactory.getCurrentSession();
@@ -56,6 +55,7 @@ public class ActorDAO {
         actorToBeUpdated.setName(updatedActor.getName());
     }
 
+    // удалить актера из базы данных
     @Transactional
     public void delete(int id) {
         Session session = sessionFactory.getCurrentSession();

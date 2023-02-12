@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Создание актера</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/actors}" th:object="${actor}">
+    <label for="name">Введите имя и фамилию актера: </label>
+    <input type="text" th:field="*{name}" id="name"/>
+    <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
+    <br />
+    <input type="submit" value="Создать актера"/>
+</form>
+
+</body>
+</html>

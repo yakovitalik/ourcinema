@@ -10,6 +10,7 @@ import ru.yakovitalik.moviegaid.models.Movie;
 
 import javax.validation.Valid;
 
+// контролер для запросов относительно фильмов в режиме администратора
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -21,23 +22,27 @@ public class AdminController {
         this.movieDAO = movieDAO;
     }
 
+    // метод для вывода страницы с фильмами(режим админа)
     @GetMapping()
     public String index(Model model) {
         model.addAttribute("movies", movieDAO.index());
         return "admin/index";
     }
 
+    // метод для вывода данных конкретного фильма(режим админа)
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
         model.addAttribute("movie", movieDAO.show(id));
         return "admin/show";
     }
 
+    // метод для перехода на страницу создания нового фильма и заполнения данных
     @GetMapping("/new")
     public String newMovie(@ModelAttribute("movie") Movie movie) {
         return "admin/new";
     }
 
+    // метод для создания нового фильма
     @PostMapping
     public String create(@ModelAttribute("movie") @Valid Movie movie,
                          BindingResult bindingResult) {
@@ -47,12 +52,14 @@ public class AdminController {
         return "redirect:/admin";
     }
 
+    // метод для редактирования существующего фильма
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") int id) {
         model.addAttribute("movie", movieDAO.show(id));
         return "admin/edit";
     }
 
+    // метод для обновления данных существующего фильма
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("movie") @Valid Movie movie,
                          BindingResult bindingResult, @PathVariable("id") int id) {
@@ -62,6 +69,7 @@ public class AdminController {
         return "redirect:/admin";
     }
 
+    // метод для удаления фильма
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") int id) {
         movieDAO.delete(id);

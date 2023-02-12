@@ -39,6 +39,7 @@
     <input type="text" th:field="*{rating}" id="rating"/>
     <div style="color:red" th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}">Rating error</div>
     <br/>
+    <br/>
     <input type="submit" value="Обновить"/>
 </form>
 

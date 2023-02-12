@@ -11,6 +11,7 @@ import ru.yakovitalik.moviegaid.models.Movie;
 import java.util.ArrayList;
 import java.util.List;
 
+// класс для операций с базой данных для фильмов
 @Component
 public class MovieDAO {
 
@@ -21,7 +22,7 @@ public class MovieDAO {
         this.sessionFactory = sessionFactory;
     }
 
-    // общий список всех фильмов
+    // метод для вывода общего списка всех фильмов
     @Transactional(readOnly = true)
     public List<Movie> index() {
         Session session = sessionFactory.getCurrentSession();
@@ -30,7 +31,7 @@ public class MovieDAO {
                 .getResultList();
     }
 
-    // выведет фильм
+    // выведет конкретный фильм
     @Transactional(readOnly = true)
     public Movie show(int id) {
         Session session = sessionFactory.getCurrentSession();
@@ -39,12 +40,14 @@ public class MovieDAO {
         return movie;
     }
 
+    // сохранение фильма в БД
     @Transactional
     public void save(Movie movie) {
         Session session = sessionFactory.getCurrentSession();
         session.save(movie);
     }
 
+    // обновление фильма в БД
     @Transactional
     public void update(int id, Movie updatedMovie) {
         Session session = sessionFactory.getCurrentSession();
@@ -60,6 +63,7 @@ public class MovieDAO {
         movieToBeUpdated.setRating(updatedMovie.getRating());
     }
 
+    // удаление фильма из базы данных
     @Transactional
     public void delete(int id) {
         Session session = sessionFactory.getCurrentSession();

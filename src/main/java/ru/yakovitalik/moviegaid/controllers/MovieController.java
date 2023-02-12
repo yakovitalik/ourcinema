@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.yakovitalik.moviegaid.dao.ActorDAO;
 import ru.yakovitalik.moviegaid.dao.MovieDAO;
 
-
+// контролер для запросов в режиме пользователя
 @Controller
 @RequestMapping("/movies")
 public class MovieController {
