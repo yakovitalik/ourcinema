@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Админ панель фильмов</title>
+</head>
+<body>
+
+<div th:each="movie : ${movies}">
+    <a th:href="@{/admin/{id}(id=${movie.getId()})}"
+       th:text="${movie.getTitle() + ', ' + movie.getYear() + ', ' + movie.getGenre()}">Movie</a>
+</div>
+
+<br/>
+<hr/>
+    <a href="/admin/new">Добавить новый фильм</a>
+
+<br/>
+<hr/>
+
+</body>
+</html>

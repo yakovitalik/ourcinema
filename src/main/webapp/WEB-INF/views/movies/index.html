@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Онлайн кинотеатр</title>
+    <link type="text/css" rel="stylesheet" href="../../../sources/css/movie_index.css" />
+</head>
+<body>
+<div class="main">
+    <div class="header">
+        <div class="logo">
+            <div class="logo_text">
+                <h1><a href="/">НашеКино</a></h1>
+                <h2>Кино - наша страсть</h2>
+            </div>
+        </div>
+
+        <div class="menubar">
+            <ul class="menu">
+                <li><a href="/">Главная</a></li>
+                <li class="selected"><a href="/movies">Фильмы</a></li>
+                <li><a href="#">Сериалы</a></li>
+                <li><a href="#">Рейтинг фильмов</a></li>
+                <li><a href="#">Контакты</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="site_content">
+        <div class="movies" th:each="movie : ${movies}">
+                <a th:href="@{/movies/{id}(id=${movie.getId()})}">
+                    <img th:src="@{../../../sources/img/{cover}(cover=${movie.getCover()})}"
+                                              alt="Обложка фильма" width="150" height="225">
+                <p><a th:href="@{/movies/{id}(id=${movie.getId()})}"
+                      th:text="${movie.getTitle() + ' ' + '(' + movie.getYear() + '),'}">Movie</a></p>
+
+                <p><a th:href="@{/movies/{id}(id=${movie.getId()})}"
+                      th:text="${movie.getGenre()}">Movie</a></p>
+                <br />
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

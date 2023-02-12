@@ -1,0 +1,18 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
+/src/main/webapp/sources/video/
+/src/main/webapp/sources/img/
+!/src/main/webapp/sources/img/
+!/src/main/webapp/sources/video/
+/target/ourcinema/sources/video/
+/target/ourcinema/sources/img/
+!/target/ourcinema/sources/video/
+!/target/ourcinema/sources/img/
+/target/
+!/target/

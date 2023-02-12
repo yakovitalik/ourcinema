@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${movie.getTitle()}">Информация о фильме</title>
+    <link type="text/css" rel="stylesheet" href="../../../sources/css/movie_show.css" />
+</head>
+<body>
+<div class="main">
+    <div class="header">
+        <div class="logo">
+            <div class="logo_text">
+                <h1><a href="/">НашеКино</a></h1>
+                <h2>Кино - наша страсть</h2>
+            </div>
+        </div>
+
+        <div class="menubar">
+            <ul class="menu">
+                <li><a href="/">Главная</a></li>
+                <li class="selected"><a href="/movies">Фильмы</a></li>
+                <li><a href="#">Сериалы</a></li>
+                <li><a href="#">Рейтинг фильмов</a></li>
+                <li><a href="#">Контакты</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="h1">
+        <h1><p th:text="${movie.getTitle() + ' (' + movie.getYear() + ')'}">VALUE</p></h1>
+    </div>
+    <br />
+    <div class="site_content">
+
+        <img th:src="@{../../../sources/img/{cover}(cover=${movie.getCover()})}"
+             alt="Обложка фильма" width="250" height="375">
+        <br />
+        <p th:text="${movie.getGenre() + ', ' + movie.getCountry()}">VALUE</p>
+        <br />
+        <p th:text="${'Режиссер: ' + movie.getDirector()}">VALUE</p>
+        <br />
+        <p th:text="${'В ролях: ' + movie.getActors()}">VALUE</p>
+        <br />
+        <p th:text="${'Длительность ' + movie.getDuration()}">VALUE</p>
+        <br />
+        <p th:text="${'Рейтинг: ' + movie.getRating()}">VALUE</p>
+        <br />
+        <br />
+        <p th:text="${movie.getDescription()}">VALUE</p>
+        <br />
+        <br />
+        <h2>Смотреть фильм онлайн: </h2>
+        <br />
+        <video controls width="400" height="300">
+            <source th:src="@{../../../sources/video/{video}(video=${movie.getVideo()})}" type="video/mp4"><!-- MP4 для Safari, IE9, iPhone, iPad, Android, и Windows Phone 7 -->
+            <source src="@{../../../sources/video/{video}(video=${movie.getVideo()})}" type="video/webm"><!-- WebM/VP8 для Firefox4, Opera, и Chrome -->
+            <source src="@{../../../sources/video/{video}(video=${movie.getVideo()})}" type="video/ogg"><!-- Ogg/Vorbis для старых версий браузеров Firefox и Opera -->
+            <object data="@{../../../sources/video/{video}(video=${movie.getVideo()})}" type="application/x-shockwave-flash"><!-- добавляем видеоконтент для устаревших браузеров, в которых нет поддержки элемента video -->
+                <param name="movie" value="video.swf">
+            </object>
+        </video>
+</div>
+
+</body>
+</html>
