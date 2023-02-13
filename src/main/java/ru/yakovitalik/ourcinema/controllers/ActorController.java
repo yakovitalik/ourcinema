@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.yakovitalik.ourcinema.dao.ActorDAO;
 import ru.yakovitalik.ourcinema.models.Actor;
+import ru.yakovitalik.ourcinema.util.ActorValidator;
 
 import javax.validation.Valid;
 
@@ -15,10 +16,12 @@ import javax.validation.Valid;
 @RequestMapping("/actors")
 public class ActorController {
     private final ActorDAO actorDAO;
+    private final ActorValidator actorValidator;
 
     @Autowired
-    public ActorController(ActorDAO actorDAO) {
+    public ActorController(ActorDAO actorDAO, ActorValidator actorValidator) {
         this.actorDAO = actorDAO;
+        this.actorValidator = actorValidator;
     }
 
     // вывод списка всех актеров в базе данных
@@ -45,6 +48,8 @@ public class ActorController {
     @PostMapping
     public String create(@ModelAttribute("actor") @Valid Actor actor,
                          BindingResult bindingResult) {
+        actorValidator.validate(actor, bindingResult);
+
         if(bindingResult.hasErrors())
             return "actors/new";
         actorDAO.save(actor);
@@ -62,6 +67,8 @@ public class ActorController {
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("actor") @Valid Actor actor,
                          BindingResult bindingResult, @PathVariable("id") int id) {
+        actorValidator.validate(actor, bindingResult);
+
         if(bindingResult.hasErrors())
             return "actors/edit";
         actorDAO.update(id, actor);

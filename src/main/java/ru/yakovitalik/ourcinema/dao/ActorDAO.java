@@ -2,12 +2,14 @@ package ru.yakovitalik.ourcinema.dao;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import ru.yakovitalik.ourcinema.models.Actor;
 
 import java.util.List;
+import java.util.Optional;
 
 // класс для операций с базой данных для актеров
 @Component
@@ -37,6 +39,17 @@ public class ActorDAO {
         Actor actor = session.get(Actor.class, id);
         String movies = actor.getMovies().toString();
         return actor;
+    }
+
+    // перегруженный метод show для валидации имени актера
+    @Transactional(readOnly = true)
+    public Optional<Actor> show(String name) {
+        Session session = sessionFactory.getCurrentSession();
+        String hql = "select a from Actor a where a.name = :name";
+        Query<Actor> query = session.createQuery(hql, Actor.class);
+        query.setParameter("name", name);
+        List<Actor> actors = query.list();
+        return actors.stream().findAny();
     }
 
     // сохранить актера в базе данных
