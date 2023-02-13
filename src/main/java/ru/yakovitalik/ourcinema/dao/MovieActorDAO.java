@@ -1,11 +1,11 @@
-package ru.yakovitalik.moviegaid.dao;
+package ru.yakovitalik.ourcinema.dao;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import ru.yakovitalik.moviegaid.models.Actor;
+import ru.yakovitalik.ourcinema.models.Actor;
 
 import java.util.List;
 

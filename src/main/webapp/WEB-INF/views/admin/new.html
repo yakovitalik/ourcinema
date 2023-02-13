@@ -39,6 +39,14 @@
     <input type="text" th:field="*{rating}" id="rating"/>
     <div style="color:red" th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}">Rating error</div>
     <br/>
+    <label for="cover">Введите название файла обложки: </label>
+    <input type="text" th:field="*{cover}" id="cover"/>
+    <div style="color:red" th:if="${#fields.hasErrors('cover')}" th:errors="*{cover}">Cover error</div>
+    <br/>
+    <label for="video">Введите название файла видео: </label>
+    <input type="text" th:field="*{video}" id="video"/>
+    <div style="color:red" th:if="${#fields.hasErrors('video')}" th:errors="*{video}">Video error</div>
+    <br/>
     <input type="submit" value="Создать"/>
 </form>
 

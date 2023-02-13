@@ -1,12 +1,12 @@
-package ru.yakovitalik.moviegaid.controllers;
+package ru.yakovitalik.ourcinema.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import ru.yakovitalik.moviegaid.dao.MovieDAO;
-import ru.yakovitalik.moviegaid.models.Movie;
+import ru.yakovitalik.ourcinema.dao.MovieDAO;
+import ru.yakovitalik.ourcinema.models.Movie;
 
 import javax.validation.Valid;
 

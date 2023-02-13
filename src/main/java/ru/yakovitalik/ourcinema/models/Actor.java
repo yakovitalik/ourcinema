@@ -1,4 +1,4 @@
-package ru.yakovitalik.moviegaid.models;
+package ru.yakovitalik.ourcinema.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
