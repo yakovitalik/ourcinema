@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import ru.yakovitalik.ourcinema.models.Actor;
+import ru.yakovitalik.ourcinema.models.Movie;
 
 import java.util.List;
 
@@ -21,9 +22,19 @@ public class MovieActorDAO {
 
     // выгрузит список актеров для конкретного фильма
     @Transactional(readOnly = true)
-    public List<Actor> showall(int movieId) {
+    public List<Actor> showList(int movieId) {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("select p from Actor p", Actor.class)
-                .getResultList();
+        Movie movie = session.get(Movie.class, movieId);
+        List<Actor> actorList = movie.getActors();
+        String actors = actorList.toString();
+        return actorList;
     }
+
+    // получить фильм из БД
+    @Transactional(readOnly = true)
+    public Movie getMovie(int movieId) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.get(Movie.class, movieId);
+    }
+
 }

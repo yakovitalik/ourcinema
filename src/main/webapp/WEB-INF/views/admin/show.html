@@ -25,7 +25,9 @@
 <form th:method="DELETE" th:action="@{/admin/{id}(id=${movie.getId()})}">
     <input type="submit" value="Удалить фильм"/>
 </form>
-
+<br/>
+<hr>
+<h3><a th:href="@{/union/{id}(id=${movie.getId()})}">Редактирование списка актеров</a></h3>
 
 </body>
 </html>
