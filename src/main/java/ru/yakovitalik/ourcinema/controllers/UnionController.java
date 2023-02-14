@@ -59,16 +59,35 @@ public class UnionController {
         return "redirect:/union" + "?movid=" + movieId + "&actid=" + savedId;
     }
 
+    @GetMapping("/search/{id}")
+    public String searchActor(@PathVariable("id") int movieId, Model model) {
+        model.addAttribute("movie", movieActorDAO.getMovie(movieId));
+        return "union/search";
+    }
+
+    // вывод страницы с данными конкретного актера
+    @GetMapping("/show/{id}")
+    public String showActor(@PathVariable("id") int movieId, @RequestParam("name") String actorName,
+                            Model model) {
+        Actor findActor = movieActorDAO.showActor(actorName);
+        if(findActor == null) {
+            return "union/nosearch";
+        } else {
+            model.addAttribute("movie", movieActorDAO.getMovie(movieId));
+            model.addAttribute("actor", findActor);
+            return "union/show";
+        }
+    }
+
     // привязать только что созданного актера к фильму
-//    @PostMapping("/connect")
-//    public String connect(@ModelAttribute("movie") Movie movie, @ModelAttribute("actor") Actor actor, Model model) {
-//        int movieId = movie.getId();
-//        int actId = actor.getId();
-//        movieActorDAO.add(movieId, actId);
-//        model.addAttribute("movie", movie);
-//        model.addAttribute("actor", actor);
-//        return "redirect:/union" + "?movid=" + movieId + "&actid=" + actId;
-//    }
+    @PostMapping("/connect")
+    public String connect(@RequestParam("id") int movieId, @RequestParam("name") String actorName) {
+
+        Actor actor = movieActorDAO.showActor(actorName);
+        int actId = actor.getId();
+        movieActorDAO.add(movieId, actId);
+        return "redirect:/union" + "?movid=" + movieId + "&actid=" + actId;
+    }
 
 
     // переход на страницу добавления

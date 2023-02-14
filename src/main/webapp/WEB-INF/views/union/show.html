@@ -6,14 +6,23 @@
 </head>
 <body>
 
-<p th:text="${'ID: ' + actor.getId()}">VALUE</p>
-<p th:text="${'Имя: ' + actor.getName()}">VALUE</p>
-<p th:text="${'Фильмы: ' + actor.getMovies()}">VALUE</p>
-
+<p th:text="${'Добавляем к фильму: ' + movie.getTitle()}">VALUE</p>
+<p th:text="${'Актер: ' + actor.getName()}">VALUE</p>
 
 <br />
-<form th:method="POST" th:action="@{/union/connect}" th:object="actor">
-    <input type="submit" value="Добавить актера"/>
+
+<form action="/union/connect" method="post">
+    <div>
+        <label for="id">Movie Id</label>
+        <input name="id" id="id" th:value="${movie.getId()}">
+    </div>
+    <div>
+        <label for="name">ActorName</label>
+        <input name="name" id="name" th:value="${actor.getName()}">
+    </div>
+    <div>
+        <button>Добавить актера к фильму</button>
+    </div>
 </form>
 <br />
 

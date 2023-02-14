@@ -2,6 +2,7 @@ package ru.yakovitalik.ourcinema.dao;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,6 +43,17 @@ public class MovieActorDAO {
     public Movie getMovie(int movieId) {
         Session session = sessionFactory.getCurrentSession();
         return session.get(Movie.class, movieId);
+    }
+
+    // метод show для поиска по имени
+    @Transactional(readOnly = true)
+    public Actor showActor(String name) {
+        Session session = sessionFactory.getCurrentSession();
+        String hql = "select a from Actor a where a.name = :name";
+        Query<Actor> query = session.createQuery(hql, Actor.class);
+        query.setParameter("name", name);
+        List<Actor> actors = query.list();
+        return actors.stream().findAny().orElse(null);
     }
 
     // получить актера из БД
