@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Данные о актере</title>
+</head>
+<body>
+
+<p th:text="${'ID: ' + actor.getId()}">VALUE</p>
+<p th:text="${'Имя: ' + actor.getName()}">VALUE</p>
+<p th:text="${'Фильмы: ' + actor.getMovies()}">VALUE</p>
+
+
+<br />
+<form th:method="POST" th:action="@{/union/connect}" th:object="actor">
+    <input type="submit" value="Добавить актера"/>
+</form>
+<br />
+
+</body>
+</html>

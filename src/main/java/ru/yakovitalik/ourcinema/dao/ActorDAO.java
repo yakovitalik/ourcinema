@@ -54,9 +54,10 @@ public class ActorDAO {
 
     // сохранить актера в базе данных
     @Transactional
-    public void save(Actor actor) {
+    public int save(Actor actor) {
         Session session = sessionFactory.getCurrentSession();
-        session.save(actor);
+        int savedId = (int) session.save(actor);
+        return savedId;
     }
 
     // обновить данные актера в базе данных

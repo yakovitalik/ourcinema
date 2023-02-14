@@ -52,8 +52,8 @@ public class ActorController {
 
         if(bindingResult.hasErrors())
             return "actors/new";
-        actorDAO.save(actor);
-        return "redirect:/actors";
+        int savedId = actorDAO.save(actor);
+        return "redirect:/actors" + "?actid=" + savedId;
     }
 
     // метод для редактирования существующего актера

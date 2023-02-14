@@ -59,7 +59,7 @@ public class Movie {
     private String video;           // название видео файла фильма(с расширением)
 
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "Movie_Actor",
             joinColumns = @JoinColumn(name = "movie_id"),

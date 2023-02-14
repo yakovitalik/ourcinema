@@ -5,29 +5,78 @@ package ru.yakovitalik.ourcinema.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import ru.yakovitalik.ourcinema.dao.MovieActorDAO;
+import ru.yakovitalik.ourcinema.models.Actor;
+import ru.yakovitalik.ourcinema.models.Movie;
+import ru.yakovitalik.ourcinema.util.ActorValidator;
 
-import java.util.List;
+import javax.validation.Valid;
 
 
 @Controller
 @RequestMapping("/union")
 public class UnionController {
     private final MovieActorDAO movieActorDAO;
+    private final ActorValidator actorValidator;
 
     @Autowired
-    public UnionController(MovieActorDAO movieActorDAO) {
+    public UnionController(MovieActorDAO movieActorDAO, ActorValidator actorValidator) {
         this.movieActorDAO = movieActorDAO;
+        this.actorValidator = actorValidator;
     }
 
     // вывести список актеров для конкретного фильма
-    @GetMapping("/{id}")
-    public String showList(@PathVariable("id") int movieId, Model model) {
+    @GetMapping()
+    public String showList(@RequestParam("movid") int movieId, Model model) {
         model.addAttribute("actors", movieActorDAO.showList(movieId));
         model.addAttribute("movie", movieActorDAO.getMovie(movieId));
         return "union/actors";
     }
+
+    // создание нового актера(отдельное, для привязки к фильму)
+    // метод для перехода на страницу создания нового актера и заполнения данных
+    @GetMapping("/new")
+    public String newActor(@RequestParam("movid") int movieId, @ModelAttribute("actor") Actor actor,
+                           Model model) {
+        model.addAttribute("movie", movieActorDAO.getMovie(movieId));
+        return "union/new";
+    }
+
+    // метод для создания нового актера и добавления к фильму
+    @PostMapping
+    public String create(@RequestParam("movid") int movieId, @ModelAttribute("actor") @Valid Actor actor,
+                         BindingResult bindingResult, Model model) {
+        actorValidator.validate(actor, bindingResult);
+
+        if(bindingResult.hasErrors())
+            return "actors/new";
+        int savedId = movieActorDAO.saveActor(actor);
+        movieActorDAO.add(movieId, savedId);
+        model.addAttribute("movie", movieActorDAO.getMovie(movieId));
+        model.addAttribute("actor", movieActorDAO.getActor(savedId));
+        return "redirect:/union" + "?movid=" + movieId + "&actid=" + savedId;
+    }
+
+    // привязать только что созданного актера к фильму
+//    @PostMapping("/connect")
+//    public String connect(@ModelAttribute("movie") Movie movie, @ModelAttribute("actor") Actor actor, Model model) {
+//        int movieId = movie.getId();
+//        int actId = actor.getId();
+//        movieActorDAO.add(movieId, actId);
+//        model.addAttribute("movie", movie);
+//        model.addAttribute("actor", actor);
+//        return "redirect:/union" + "?movid=" + movieId + "&actid=" + actId;
+//    }
+
+
+    // переход на страницу добавления
+//    @GetMapping("/add")
+//    public String addActor(@RequestParam("id") int movieId,
+//                           @ModelAttribute("actor") Actor actor) {
+//        movieActorDAO.add(movieId, actor.getName());
+//        return "union/add";
+//    }
+
 }

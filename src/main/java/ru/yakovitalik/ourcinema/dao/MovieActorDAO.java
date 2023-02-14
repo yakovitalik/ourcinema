@@ -30,11 +30,43 @@ public class MovieActorDAO {
         return actorList;
     }
 
+    // сохранить актера в базе данных и вернуть его id
+    @Transactional
+    public int saveActor(Actor actor) {
+        Session session = sessionFactory.getCurrentSession();
+        return (int) session.save(actor);
+    }
+
     // получить фильм из БД
     @Transactional(readOnly = true)
     public Movie getMovie(int movieId) {
         Session session = sessionFactory.getCurrentSession();
         return session.get(Movie.class, movieId);
+    }
+
+    // получить актера из БД
+    @Transactional(readOnly = true)
+    public Actor getActor(int actorId) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.get(Actor.class, actorId);
+    }
+
+    // привязка актера к фильму и фильма к актеру в БД
+    @Transactional
+    public void add(int movieId, int actorId) {
+        Session session = sessionFactory.getCurrentSession();
+        Movie movie = session.get(Movie.class, movieId);
+        Actor actor = session.get(Actor.class, actorId);
+
+        // добавляем актера в список актеров этого фильма
+        List<Actor> actors = movie.getActors();
+        actors.add(actor);
+        movie.setActors(actors);
+
+        // добавляем фильм в список фильмов этого актера
+        List<Movie> movies = actor.getMovies();
+        movies.add(movie);
+        actor.setMovies(movies);
     }
 
 }

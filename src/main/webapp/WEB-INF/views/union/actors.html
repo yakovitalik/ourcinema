@@ -16,10 +16,11 @@
 
 <h4> Добавление актеров к фильму </h4>
 <hr/>
-<a href="/actors/new">Добавить нового актера</a>
+
+<a th:href="@{/union/new?movid={movid}(movid=${movie.getId()})}">Создать актера и добавить к фильму</a>
 
 <br/>
-<a href="/union/add">Добавить к фильму существующего актера</a>
+<a th:href="@{/union/add?id={id}(id=${movie.getId()})}">Добавить к фильму существующего актера</a>
 <br/>
 <hr/>
 <br/>
