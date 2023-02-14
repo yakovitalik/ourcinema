@@ -81,4 +81,22 @@ public class MovieActorDAO {
         actor.setMovies(movies);
     }
 
+    // убрать актера из фильма
+    @Transactional
+    public void delete(int movieId, int actorId) {
+        Session session = sessionFactory.getCurrentSession();
+        Movie movie = session.get(Movie.class, movieId);
+        Actor actor = session.get(Actor.class, actorId);
+
+        // убираем актера из списка актеров этого фильма
+        List<Actor> actors = movie.getActors();
+        actors.remove(actor);
+        movie.setActors(actors);
+
+        // убираем фильм из списка фильмов этого актера
+        List<Movie> movies = actor.getMovies();
+        movies.add(movie);
+        actor.setMovies(movies);
+    }
+
 }

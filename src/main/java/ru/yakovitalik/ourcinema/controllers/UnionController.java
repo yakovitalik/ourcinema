@@ -1,7 +1,5 @@
 package ru.yakovitalik.ourcinema.controllers;
 
-// контроллер для объединения баз актеров и фильмов(общие запросы)
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,12 +7,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.yakovitalik.ourcinema.dao.MovieActorDAO;
 import ru.yakovitalik.ourcinema.models.Actor;
-import ru.yakovitalik.ourcinema.models.Movie;
 import ru.yakovitalik.ourcinema.util.ActorValidator;
 
 import javax.validation.Valid;
 
-
+// контроллер для объединения баз актеров и фильмов(общие запросы)
 @Controller
 @RequestMapping("/union")
 public class UnionController {
@@ -89,13 +86,11 @@ public class UnionController {
         return "redirect:/union" + "?movid=" + movieId + "&actid=" + actId;
     }
 
-
-    // переход на страницу добавления
-//    @GetMapping("/add")
-//    public String addActor(@RequestParam("id") int movieId,
-//                           @ModelAttribute("actor") Actor actor) {
-//        movieActorDAO.add(movieId, actor.getName());
-//        return "union/add";
-//    }
+    // метод для удаления актера из фильма
+    @DeleteMapping("/{movid}")
+    public String delete(@PathVariable("movid") int movieId, @RequestParam("actid") int actorId) {
+        movieActorDAO.delete(movieId, actorId);
+        return "redirect:/union" + "?movid=" + movieId + "&actid=" + actorId;
+    }
 
 }
