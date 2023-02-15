@@ -3,52 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <title>Редактировать фильм</title>
+    <link type="text/css" rel="stylesheet" href="../../../sources/css/admin_show.css" />
 </head>
 <body>
+<body>
+<div class="main">
+    <div class="header">
+        <div class="logo">
+            <div class="logo_text">
+                <h1><a href="/">НашеКино</a></h1>
+                <h2>Панель администрирования</h2>
+            </div>
+        </div>
 
-<form th:method="PATCH" th:action="@{/admin/{id}(id=${movie.getId()})}" th:object="${movie}">
-    <label for="title">Введите название: </label>
-    <input type="text" th:field="*{title}" id="title"/>
-    <div style="color:red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title error</div>
-    <br/>
-    <label for="genre">Введите жанр: </label>
-    <input type="text" th:field="*{genre}" id="genre"/>
-    <div style="color:red" th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}">Genre error</div>
-    <br/>
-    <label for="country">Введите страну: </label>
-    <input type="text" th:field="*{country}" id="country"/>
-    <div style="color:red" th:if="${#fields.hasErrors('country')}" th:errors="*{country}">Country error</div>
-    <br/>
-    <label for="year">Введите год: </label>
-    <input type="text" th:field="*{year}" id="year"/>
-    <div style="color:red" th:if="${#fields.hasErrors('year')}" th:errors="*{year}">Year error</div>
-    <br/>
-    <label for="director">Введите режиссера: </label>
-    <input type="text" th:field="*{director}" id="director"/>
-    <div style="color:red" th:if="${#fields.hasErrors('director')}" th:errors="*{director}">Director error</div>
-    <br/>
-    <label for="duration">Введите режиссера: </label>
-    <input type="text" th:field="*{duration}" id="duration"/>
-    <div style="color:red" th:if="${#fields.hasErrors('duration')}" th:errors="*{duration}">Duration error</div>
-    <br/>
-    <label for="description">Введите описание: </label>
-    <input type="text" th:field="*{description}" id="description"/>
-    <div style="color:red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description error</div>
-    <br/>
-    <label for="rating">Введите рейтинг: </label>
-    <input type="text" th:field="*{rating}" id="rating"/>
-    <div style="color:red" th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}">Rating error</div>
-    <br/>
-    <label for="cover">Введите название файла обложки: </label>
-    <input type="text" th:field="*{cover}" id="cover"/>
-    <div style="color:red" th:if="${#fields.hasErrors('cover')}" th:errors="*{cover}">Cover error</div>
-    <br/>
-    <label for="video">Введите название файла видео: </label>
-    <input type="text" th:field="*{video}" id="video"/>
-    <div style="color:red" th:if="${#fields.hasErrors('video')}" th:errors="*{video}">Video error</div>
-    <br/>
-    <input type="submit" value="Обновить"/>
-</form>
+        <div class="menubar">
+            <ul class="menu">
+                <li><a href="/">Главная</a></li>
+                <li><a href="/admin">Фильмы</a></li>
+                <li><a href="/actors">Актеры</a></li>
+                <li class="selected"><a href="#">Редактирование</a></li>
+                <li><a href="#">Инструменты</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="site_content">
+        <br/>
+        <div class="description">
+            <h1><p th:text="${movie.getTitle() + ' (' + movie.getYear() + ')'}">VALUE</p></h1>
+            <br />
+            <img th:src="@{../../../sources/img/{cover}(cover=${movie.getCover()})}"
+                 alt="Обложка фильма" width="250" height="375">
+            <br />
+            <br />
+            <div class="forms">
+                <form th:method="PATCH" th:action="@{/admin/{id}(id=${movie.getId()})}" th:object="${movie}">
+                    <p><label for="title" class="label">Название: </label>
+                        <input type="text" class="form" th:field="*{title}" id="title"/>
+                    <div style="color:red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title error</div></p>
+                    <br/>
+                    <p><label for="genre" class="label">Введите жанр: </label>
+                    <input type="text" class="form" th:field="*{genre}" id="genre"/>
+                    <div style="color:red" th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}">Genre error</div></p>
+                    <br/>
+                    <p> <label for="country" class="label">Введите страну: </label>
+                    <input type="text" class="form" th:field="*{country}" id="country"/>
+                    <div style="color:red" th:if="${#fields.hasErrors('country')}" th:errors="*{country}">Country error</div></p>
+                    <br/>
+                    <p><label for="year" class="label">Введите год: </label>
+                    <input type="text" class="form" th:field="*{year}" id="year"/>
+                    <div style="color:red" th:if="${#fields.hasErrors('year')}" th:errors="*{year}">Year error</div></p>
+                    <br/>
+                    <p> <label for="director" class="label">Введите режиссера: </label>
+                    <input type="text" class="form" th:field="*{director}" id="director"/>
+                    <div style="color:red" th:if="${#fields.hasErrors('director')}" th:errors="*{director}">Director error</div></p>
+                    <br/>
+                    <p> <label for="duration" class="label">Длительность: </label>
+                    <input type="text" class="form" th:field="*{duration}" id="duration"/>
+                    <div style="color:red" th:if="${#fields.hasErrors('duration')}" th:errors="*{duration}">Duration error</div></p>
+                    <br/>
+                    <p><label for="description" class="label">Введите описание: </label>
+                    <textarea class="form" rows="6" cols="70" name="description" th:field="*{description}" id="description"></textarea>
+                    <!--<input type="text" class="form" th:field="*{description}" id="description"/> -->
+                    <div style="color:red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description error</div></p>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <p><label for="rating" class="label">Введите рейтинг: </label>
+                    <input type="text" class="form" th:field="*{rating}" id="rating"/>
+                    <div style="color:red" th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}">Rating error</div></p>
+                    <br/>
+                    <p><label for="cover" class="label">Введите название файла обложки: </label>
+                    <input type="text" class="form" th:field="*{cover}" id="cover"/>
+                    <div style="color:red" th:if="${#fields.hasErrors('cover')}" th:errors="*{cover}">Cover error</div></p>
+                    <br/>
+                    <p><label for="video" class="label">Введите название файла видео: </label>
+                    <input type="text" class="form" th:field="*{video}" id="video"/>
+                    <div style="color:red" th:if="${#fields.hasErrors('video')}" th:errors="*{video}">Video error</div></p>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <input class="button_ok" type="submit" value="Обновить"/>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

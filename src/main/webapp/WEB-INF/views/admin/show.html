@@ -3,31 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <title>Данные о фильме</title>
+    <link type="text/css" rel="stylesheet" href="../../../sources/css/admin_show.css" />
 </head>
 <body>
+<div class="main">
+    <div class="header">
+        <div class="logo">
+            <div class="logo_text">
+                <h1><a href="/">НашеКино</a></h1>
+                <h2>Панель администрирования</h2>
+            </div>
+        </div>
 
-<p th:text="${'ID: ' + movie.getId()}">VALUE</p>
-<p th:text="${'Название: ' + movie.getTitle()}">VALUE</p>
-<p th:text="${'Год: ' + movie.getYear()}">VALUE</p>
-<p th:text="${'Жанр: ' + movie.getGenre()}">VALUE</p>
-<p th:text="${'Страна: ' + movie.getCountry()}">VALUE</p>
-<p th:text="${'Режиссер: ' + movie.getDirector()}">VALUE</p>
-<p th:text="${'Длительность ' + movie.getDuration()}">VALUE</p>
-<p th:text="${'Описание: ' + movie.getDescription()}">VALUE</p>
-<p th:text="${'Рейтинг: ' + movie.getRating()}">VALUE</p>
-<p th:text="${'Актеры: ' + movie.getActors()}">VALUE</p>
+        <div class="menubar">
+            <ul class="menu">
+                <li><a href="/">Главная</a></li>
+                <li><a href="/admin">Фильмы</a></li>
+                <li><a href="/actors">Актеры</a></li>
+                <li class="selected"><a href="#">Редактирование</a></li>
+                <li><a href="#">Инструменты</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="site_content">
+        <br/>
+        <div class="description">
+            <h1><p th:text="${movie.getTitle() + ' (' + movie.getYear() + ')'}">VALUE</p></h1>
+            <br />
+            <img th:src="@{../../../sources/img/{cover}(cover=${movie.getCover()})}"
+                 alt="Обложка фильма" width="250" height="375">
+            <br />
+            <br />
+            <p th:text="${'ID: ' + movie.getId()}">VALUE</p>
+            <br />
+            <p th:text="${'Жанр: ' + movie.getGenre()}">VALUE</p>
+            <br />
+            <p th:text="${'Страна: ' + movie.getCountry()}">VALUE</p>
+            <br />
+            <p th:text="${'Режиссер: ' + movie.getDirector()}">VALUE</p>
+            <br />
+            <p th:text="${'Длительность: ' + movie.getDuration()}">VALUE</p>
+            <br />
+            <p th:text="${'Описание: ' + movie.getDescription()}">VALUE</p>
+            <br />
+            <p th:text="${'Рейтинг: ' + movie.getRating()}">VALUE</p>
+            <br />
+            <p th:text="${'В ролях: ' + movie.getActors()}">VALUE</p>
+            <br />
+        </div>
+        <br/>
+        <div class="manage">
+            <h3><a th:href="@{/union?movid={movid}(movid=${movie.getId()})}">Редактировать список актеров фильма</a></h3>
+            <br />
+            <br />
+            <br />
+            <form th:method="GET" th:action="@{/admin/{id}/edit(id=${movie.getId()})}">
+                <button class="button_neitral">Редактировать фильм</button>
+            </form>
+            <br/>
+            <form th:method="DELETE" th:action="@{/admin/{id}(id=${movie.getId()})}">
+                <button class="button_no">Удалить фильм</button>
+            </form>
+            <br/>
+            <br/>
 
-<br/>
-<form th:method="GET" th:action="@{/admin/{id}/edit(id=${movie.getId()})}">
-    <input type="submit" value="Редактировать данные фильма"/>
-</form>
-<br/>
-<form th:method="DELETE" th:action="@{/admin/{id}(id=${movie.getId()})}">
-    <input type="submit" value="Удалить фильм"/>
-</form>
-<br/>
-<hr>
-<h3><a th:href="@{/union?movid={movid}(movid=${movie.getId()})}">Редактирование списка актеров</a></h3>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
