@@ -11,3 +11,4 @@
 **/target/
 *.mp4
 *.jpg
+*.properties
