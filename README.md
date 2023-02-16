@@ -1,10 +1,13 @@
 # OurCinema
 This is our online cinema
-<br />
+***
 <img src=https://github.com/yakovitalik/ourcinema/blob/master/screen1.jpg>
-<br />
+
+***
+
 <img src=https://github.com/yakovitalik/ourcinema/blob/master/screen2.jpg>
-<br />
+
+***
 ## About program
 This is an online cinema.
 The application dynamically builds the web pages of the online cinema by downloading information from the database and using the files in the application folder. 
