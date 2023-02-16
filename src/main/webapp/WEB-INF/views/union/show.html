@@ -3,27 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title>Данные о актере</title>
+    <link type="text/css" rel="stylesheet" href="../../../sources/css/union_show.css" />
 </head>
 <body>
+<div class="main">
+    <div class="header">
+        <div class="logo">
+            <div class="logo_text">
+                <h1><a href="/">НашеКино</a></h1>
+                <h2>Панель администрирования</h2>
+            </div>
+        </div>
 
-<p th:text="${'Добавляем к фильму: ' + movie.getTitle()}">VALUE</p>
-<p th:text="${'Актер: ' + actor.getName()}">VALUE</p>
-
-<br />
-
-<form action="/union/connect" method="post">
-    <div>
-        <label for="id">Movie Id</label>
-        <input name="id" id="id" th:value="${movie.getId()}">
+        <div class="menubar">
+            <ul class="menu">
+                <li><a href="/">Главная</a></li>
+                <li><a href="/admin">Фильмы</a></li>
+                <li><a href="/actors">Актеры</a></li>
+                <li class="selected"><a href="#">Редактирование</a></li>
+                <li><a href="#">Инструменты</a></li>
+            </ul>
+        </div>
     </div>
-    <div>
-        <label for="name">ActorName</label>
-        <input name="name" id="name" th:value="${actor.getName()}" readonly>
+    <div class="site_content">
+        <br/>
+        <div class="description">
+            <h4 th:text="${'Добавляем к фильму: ' + movie.getTitle()}">VALUE</h4>
+            <br />
+            <form action="/union/connect" method="post">
+                    <label for="id" class="label">Фильм id:</label>
+                    <input name="id" class="form" id="id" th:value="${movie.getId()}" readonly>
+                <br />
+                    <label for="name" class="label">Имя актера: </label>
+                    <input name="name" class="form" id="name" th:value="${actor.getName()}" readonly>
+                <br />
+                <br />
+                    <button class="button_ok">Добавить актера к фильму</button>
+            </form>
+        </div>
     </div>
-    <div>
-        <button>Добавить актера к фильму</button>
-    </div>
-</form>
+</div>
 <br />
 
 </body>

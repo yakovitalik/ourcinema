@@ -1,4 +1,10 @@
 # OurCinema
+## This is our online cinema
+<br />
+<img src=https://github.com/yakovitalik/ourcinema/blob/master/screen1.jpg>
+*****************************
+<img src=https://github.com/yakovitalik/ourcinema/blob/master/screen2.jpg>
+<br />
 *****************************
 ## About program
 *****************************
@@ -18,10 +24,7 @@ This application is configured with Java code and uses annotations.
 Thymeleaf template engine is used to connect Java code to HTML.
 The fields of the Film class have form validation that prevents
 incorrect values from being passed to the database.
-
-*****************************
 ## How to use the application
-*****************************
 To use the application, you must have installed databases PostgreSQL, 
 Apache Tomcat  (version 8 or 9 is recommended).
 The program runs as a war application.

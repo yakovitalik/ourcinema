@@ -3,13 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title>Добавление актера к фильму</title>
+    <link type="text/css" rel="stylesheet" href="../../../sources/css/admin_show.css" />
 </head>
 <body>
-<h1>Поиск актера</h1>
-<br />
-<form th:action="@{/union/show/{id}(id=${movie.getId()})}">
-    <p><input name="name"></p>
-    <p><input type="submit" value="Найти актера в базе"/></p>
-</form>
+<div class="main">
+    <div class="header">
+        <div class="logo">
+            <div class="logo_text">
+                <h1><a href="/">НашеКино</a></h1>
+                <h2>Панель администрирования</h2>
+            </div>
+        </div>
+
+        <div class="menubar">
+            <ul class="menu">
+                <li><a href="/">Главная</a></li>
+                <li><a href="/admin">Фильмы</a></li>
+                <li><a href="/actors">Актеры</a></li>
+                <li class="selected"><a href="#">Редактирование</a></li>
+                <li><a href="#">Инструменты</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="site_content">
+        <br/>
+        <div class="description">
+            <h1>Поиск актера</h1>
+            <br />
+            <br />
+            <div class="forms">
+                <form th:action="@{/union/show/{id}(id=${movie.getId()})}">
+                    <label for="name" class="label">Введите имя и фамилию актера: </label>
+                    <input class="form" type="text" name="name" id="name">
+                    <br/>
+                    <br/>
+                    <input class="button_ok" type="submit" value="Найти актера в базе"/>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
