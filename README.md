@@ -1,5 +1,7 @@
 # OurCinema
-This is our online cinema
+This is our online cinema. <br />
+You can watch a video of this project here:
+<a href="https://youtu.be/0udewm455hM">Video review on youtube</a>
 ***
 <img src=https://github.com/yakovitalik/ourcinema/blob/master/screen1.jpg>
 
@@ -12,7 +14,6 @@ This is our online cinema
 This is an online cinema.
 The application dynamically builds the web pages of the online cinema by downloading information from the database and using the files in the application folder. 
 You can add movies to it, and application users will be able to watch them online.
-A little later, a link to a YouTube video will appear here, where I will review this project.
 
 Stack: Java17/SpringMVC/Hibernate ORM/Maven/Apache Tomcat 9/HTML5/CSS3/Thymeleaf/.
 The application is written in Java (JDK 17) in the Spring MVC + Hibernate ORM.
