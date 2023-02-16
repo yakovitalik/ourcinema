@@ -54,6 +54,10 @@
     padding: 20px 20px 20px 20px;
 }
 
+.site_content p {
+    font-size: 18px;
+}
+
 .movies {
     width: 1400px;
     height: auto;
@@ -102,42 +106,6 @@ ul.menu li a:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
-.button_neitral {
-    min-width: 240px;
-    background: #f09846;
-    border: none;
-    border-radius: 8px;
-    color: #ffffff;
-    padding: 10px 24px;
-    text-align: center;
-    display: inline-block;
-    font-size: 16px;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-}
-
-.button_no {
-    min-width: 240px;
-    background-color: white;
-    border: 2px solid #cf1b30;
-    border-radius: 8px;
-    color: #cf1b30;
-    padding: 10px 24px;
-    text-align: center;
-    display: inline-block;
-    font-size: 16px;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-}
-
-.label {
-    width: 600px;
-    font-size: 16px;
-}
-
-.form {
-    float: right;
-    width: 500px;
-    margin-right: 630px;
-    padding: 2px 2px 2px 2px;
-    font-size: 14px;
-    border-radius: 3px;
+.red {
+    color: red;
 }

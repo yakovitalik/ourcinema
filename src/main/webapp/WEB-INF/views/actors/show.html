@@ -3,23 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <title>Данные о актере</title>
+    <link type="text/css" rel="stylesheet" href="../../../sources/css/admin_show.css" />
 </head>
 <body>
 
-<p th:text="${'ID: ' + actor.getId()}">VALUE</p>
-<p th:text="${'Имя: ' + actor.getName()}">VALUE</p>
-<p th:text="${'Фильмы: ' + actor.getMovies()}">VALUE</p>
+<div class="main">
+    <div class="header">
+        <div class="logo">
+            <div class="logo_text">
+                <h1><a href="/">НашеКино</a></h1>
+                <h2>Панель администрирования</h2>
+            </div>
+        </div>
 
+        <div class="menubar">
+            <ul class="menu">
+                <li><a href="/">Главная</a></li>
+                <li><a href="/admin">Фильмы</a></li>
+                <li><a href="/actors">Актеры</a></li>
+                <li class="selected"><a href="#">Редактирование</a></li>
+                <li><a href="#">Инструменты</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="site_content">
+        <br/>
+        <div class="description">
+            <h2><p th:text="${actor.getName()}">VALUE</p></h2>
+            <br />
+            <br />
+            <p th:text="${'ID: ' + actor.getId()}">VALUE</p>
+            <br />
+            <p th:text="${'Фильмы: ' + actor.getMovies()}">VALUE</p>
+            <br />
+        </div>
+        <br/>
+        <div class="manage">
+            <form th:method="GET" th:action="@{/actors/{id}/edit(id=${actor.getId()})}">
+                <button class="button_neitral">Редактировать актера</button>
+            </form>
+            <br/>
+            <form th:method="DELETE" th:action="@{/actors/{id}(id=${actor.getId()})}">
+                <button class="button_no">Удалить актера</button>
+            </form>
+            <br/>
+            <br/>
 
-<br />
-<form th:method="GET" th:action="@{/actors/{id}/edit(id=${actor.getId()})}">
-    <input type="submit" value="Редактировать актера"/>
-</form>
-<br />
-<form th:method="DELETE" th:action="@{/actors/{id}(id=${actor.getId()})}">
-    <input type="submit" value="Удалить актера"/>
-</form>
-<br />
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

@@ -3,16 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <title>Редактировать данные актера</title>
+    <link type="text/css" rel="stylesheet" href="../../../sources/css/admin_show.css" />
 </head>
 <body>
+<div class="main">
+    <div class="header">
+        <div class="logo">
+            <div class="logo_text">
+                <h1><a href="/">НашеКино</a></h1>
+                <h2>Панель администрирования</h2>
+            </div>
+        </div>
 
-<form th:method="PATCH" th:action="@{/actors/{id}(id=${actor.getId()})}" th:object="${actor}">
-    <label for="name">Введите имя и фамилию актера: </label>
-    <input type="text" th:field="*{name}" id="name"/>
-    <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
-    <br />
-    <input type="submit" value="Обновить данные актера"/>
-</form>
+        <div class="menubar">
+            <ul class="menu">
+                <li><a href="/">Главная</a></li>
+                <li><a href="/admin">Фильмы</a></li>
+                <li><a href="/actors">Актеры</a></li>
+                <li class="selected"><a href="#">Редактирование</a></li>
+                <li><a href="#">Инструменты</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="site_content">
+        <br/>
+        <div class="description">
+            <h1><p th:text="${actor.getName()}">VALUE</p></h1>
+            <br />
+            <br />
+            <div class="forms">
+                <form th:method="PATCH" th:action="@{/actors/{id}(id=${actor.getId()})}" th:object="${actor}">
+                    <p><label for="name" class="label">Введите имя и фамилию актера: </label>
+                    <input type="text" class="form" th:field="*{name}" id="name"/>
+                    <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div></p>
+                    <br />
+
+                    <br/>
+                    <br/>
+                    <input class="button_ok" type="submit" value="Обновить данные актера"/>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

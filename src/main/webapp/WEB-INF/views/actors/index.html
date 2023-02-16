@@ -2,21 +2,51 @@
 <html lang="ru" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Админ панель актеров</title>
+    <title>Список актеров в базе</title>
+    <link type="text/css" rel="stylesheet" href="../../../sources/css/actor_index.css" />
 </head>
 <body>
+<div class="main">
+    <div class="header">
+        <div class="logo">
+            <div class="logo_text">
+                <h1><a href="/">НашеКино</a></h1>
+                <h2>Панель администрирования</h2>
+            </div>
+        </div>
 
-<div th:each="actor : ${actors}">
-    <a th:href="@{/actors/{id}(id=${actor.getId()})}"
-       th:text="${actor.getName()}">Actors</a>
+        <div class="menubar">
+            <ul class="menu">
+                <li><a href="/">Главная</a></li>
+                <li class="selected"><a href="/admin">Фильмы</a></li>
+                <li><a href="/actors">Актеры</a></li>
+                <li><a href="#">Редактирование</a></li>
+                <li><a href="#">Инструменты</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="site_content">
+        <h2>Управление:</h2>
+        <br/>
+        <div class="manage">
+            <form method="get" action="/actors/new">
+                <button class="button_ok">Добавить нового актера</button>
+            </form>
+            <br />
+            <p class="red">Внимание! Этот пункт только создаст актера в базе данных!</p>
+            <p class="red">Добавлять актера к фильму необходимо в меню актеров
+            для конкретного фильма! Там можно создать нового или добавить существующего актера</p>
+            <br />
+        </div>
+        <hr>
+        <h2>Список всех актеров в базе данных: </h2>
+        <br/>
+        <div class="actors" th:each="actor : ${actors}">
+            <p><a th:href="@{/actors/{id}(id=${actor.getId()})}"
+               th:text="${actor.getName()}">Actors</a></p>
+        </div>
+    </div>
 </div>
-
-<br/>
-<hr/>
-    <a href="/actors/new">Добавить нового актера</a>
-
-<br/>
-<hr/>
 
 </body>
 </html>
