@@ -1,6 +1,6 @@
 # НашеКино
 
-(English translation at the bottom of the page)
+(English translation at the bottom of the page)<br />
 Это онлайн-кинотеатр <br />
 Посмотреть видео работы этого проекта можно здесь::
 <a href="https://youtu.be/0udewm455hM">Video review on youtube</a>
